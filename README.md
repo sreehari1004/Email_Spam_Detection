@@ -10,6 +10,7 @@ A full-stack machine learning pipeline to classify emails as Spam or Ham. This p
 - Trains and evaluates classification models
 - Saves trained models for later use
 - Optional real-time alert system via email/SMS/desktop notifications
+- Streamlit frontend for interactive use
 
 ## Tech Stack
 
@@ -21,6 +22,7 @@ A full-stack machine learning pipeline to classify emails as Spam or Ham. This p
 - matplotlib, seaborn – optional visualizations
 - joblib – model serialization
 - smtplib / twilio / plyer – alerting
+- Streamlit – Web frontend
 
 ## Workflow Overview
 
@@ -32,11 +34,13 @@ A full-stack machine learning pipeline to classify emails as Spam or Ham. This p
 6. Save the model for future use
 7. Use the saved model for predictions
 8. Trigger alerts for detected spam if needed
+9. Deploy frontend via Streamlit
 
 ## Project Structure
 
 ```
 Email_Spam_Detection/
+├── main.py                 # Streamlit app entry point
 ├── data_scraper.py         # Web/email scraping logic
 ├── preprocessing.py        # Text cleaning & NLP pipeline
 ├── clustering.py           # KMeans or DBSCAN clustering
@@ -50,7 +54,7 @@ Email_Spam_Detection/
 └── README.md
 ```
 
-## How to Run
+## How to Run Locally
 
 ### 1. Clone the Repository
 
@@ -68,23 +72,42 @@ pip install -r requirements.txt
 ### 3. Run the Pipeline
 
 ```bash
-python data_scraper.py         # Step 1: Scrape data
-python preprocessing.py        # Step 2: Clean and preprocess
-python clustering.py           # Step 3: (Optional) Clustering
-python train_model.py          # Step 4: Train and save model
+python data_scraper.py
+python preprocessing.py
+python clustering.py
+python train_model.py
 ```
 
-### 4. Run Prediction with Alert
+### 4. Use CLI Prediction
 
 ```bash
 python predict.py --input "Congratulations! You've won a prize..."
 ```
 
-## Example Output
+## Streamlit Deployment
+
+You can run the interactive web app using Streamlit.
+
+### To Run Locally:
+
+```bash
+streamlit run main.py
+```
+
+### To Deploy Online:
+
+1. Go to [Streamlit Cloud](https://streamlit.io/cloud)
+2. Click **"New App"**
+3. Set the following:
+   - **Repository:** `sreehari1004/Email_Spam_Detection`
+   - **Branch:** `master`
+   - **Main file path:** `main.py`
+4. Click **"Deploy"**
+
+Once deployed, your app will be accessible at:
 
 ```
-[INFO] Message classified as SPAM
-[ALERT] Suspicious content detected. Alert triggered.
+https://emailspamdetection-bkyaa42amb7mqysy8d7rnj.streamlit.app/
 ```
 
 ## Model Performance
@@ -107,9 +130,10 @@ These options can be configured in `alerting.py`.
 ## Future Improvements
 
 - Integrate with Gmail API for real-time scanning
-- Add a web-based frontend using Streamlit or Flask
-- Use deep learning models like BERT for improved classification
-- Deploy to a cloud platform for scalability
+- Add a database to track flagged messages
+- Use deep learning models like BERT for better classification
+- Improve UI/UX with user authentication and logging
+- Deploy to cloud platforms (AWS/GCP) with Docker
 
 ## Credits
 
@@ -121,6 +145,6 @@ These options can be configured in `alerting.py`.
 ## Contact
 
 Author: Sreehari  
-GitHub: https://github.com/sreehari1004
+GitHub: [sreehari1004](https://github.com/sreehari1004)
 
 Feel free to open issues or submit pull requests to contribute.
